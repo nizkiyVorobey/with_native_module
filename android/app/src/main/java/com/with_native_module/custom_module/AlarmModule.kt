@@ -2,17 +2,11 @@ package com.with_native_module
 
 import android.app.AlarmManager
 import android.app.AlarmManager.AlarmClockInfo
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.Context
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraManager
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.react.bridge.*
 import com.google.gson.Gson
+import com.with_native_module.custom_module.AlarmReceiver
 import java.util.*
 
 

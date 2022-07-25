@@ -27,13 +27,18 @@ interface AlarmModuleI {
 interface FlashlightModuleI {
   toggleFlashlight: (status: boolean, errorCallBack: (err: any) => void) => void
 }
+interface OpenMyCustomActivityI {
+  open: () => void
+}
 
 interface NativeModulesI {
   AlarmModule: AlarmModuleI
   FlashlightModule: FlashlightModuleI
+  OpenMyCustomActivity: OpenMyCustomActivityI
 }
 
-const { AlarmModule, FlashlightModule } = NativeModules as NativeModulesI
+const { AlarmModule, FlashlightModule, OpenMyCustomActivity } =
+  NativeModules as NativeModulesI
 
 const getDate = () => {
   const time = new Date()
@@ -44,7 +49,6 @@ const getDate = () => {
   }
 }
 
-// TODO add git
 const App = () => {
   const [hours, setHours] = useState(getDate().hours)
   const [minutes, setMinutes] = useState(getDate().minutes)
@@ -68,6 +72,10 @@ const App = () => {
     })
   }
 
+  const openSecondActivity = () => {
+    OpenMyCustomActivity.open()
+  }
+
   useEffect(() => {
     FlashlightModule.toggleFlashlight(flashLightStatus, (err: any) =>
       console.log('ERROR: ', err),
@@ -81,6 +89,7 @@ const App = () => {
   const flashlightTitle = flashLightStatus
     ? 'Turn off flashlight'
     : 'Turn on flashlight'
+
   return (
     <SafeAreaView>
       <View style={styles.inputContainer}>
@@ -132,6 +141,10 @@ const App = () => {
 
       <View style={{ marginTop: 50 }}>
         <Button title={flashlightTitle} onPress={handleFlashlight} />
+      </View>
+
+      <View style={{ marginTop: 50 }}>
+        <Button title={'Open second activity'} onPress={openSecondActivity} />
       </View>
     </SafeAreaView>
   )
